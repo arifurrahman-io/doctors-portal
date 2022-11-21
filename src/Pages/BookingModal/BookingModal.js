@@ -4,7 +4,7 @@ import toast from 'react-hot-toast';
 import { AuthContext } from '../../Context/AuthProvider';
 
 const BookingModal = ({ treatment, setTreatment, selectedDate, refetch }) => {
-    const { name, slots } = treatment;
+    const { name, slots, price } = treatment;
     const date = format(selectedDate, 'PP');
     const { user } = useContext(AuthContext);
 
@@ -17,6 +17,7 @@ const BookingModal = ({ treatment, setTreatment, selectedDate, refetch }) => {
         const email = form.email.value;
         const phone = form.phone.value;
 
+        //sending data to db
         const booking = {
             selectedDate: date,
             treatment: treatment.name,
@@ -24,9 +25,10 @@ const BookingModal = ({ treatment, setTreatment, selectedDate, refetch }) => {
             slot,
             email,
             phone,
+            price
         }
 
-        fetch('http://localhost:5000/bookings', {
+        fetch('https://doctors-portal-server-jade.vercel.app/bookings', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

@@ -8,11 +8,9 @@ import useToken from '../../hooks/useToken';
 const SignUp = () => {
 
     const { register, handleSubmit, formState: { errors } } = useForm();
-
     const { createUser, updateUser } = useContext(AuthContext);
 
     const [createdUserEmail, setCreatedUserEmail] = useState('');
-
     const [token] = useToken(createdUserEmail);
 
     const navigate = useNavigate();
@@ -47,7 +45,7 @@ const SignUp = () => {
 
     const saveUser = (name, email, phone) => {
         const user = { name, email, phone }
-        fetch('http://localhost:5000/users', {
+        fetch('https://doctors-portal-server-jade.vercel.app/users', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
